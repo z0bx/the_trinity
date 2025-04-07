@@ -11,7 +11,7 @@ protected:
 public:
     shape() : name(nullptr) {}              // Анхдагч байгуулагч
     virtual ~shape() { delete[] name; }     // name-г санах ойгоос чөлөөлөх
-    char *get_name() { return this->name; } // нэрийг авах функц
+    char *get_name() { return name; } // нэрийг авах функц
     // нэр оноох функц
     void set_name(const char *n)
     {
@@ -29,15 +29,15 @@ protected:
     int a;
 
 public:
-     twod(int _a) : a(_a) {}            // анхдагч байгуулагч
-    virtual float area() = 0;           // талбай хадгалах жинхэнэ хийсвэр функц
-    virtual float perimeter() = 0;      // периметр хадгалах жинхэнэ хийсвэр функц
+    twod(int _a) : a(_a) {}        // анхдагч байгуулагч
+    virtual float area() = 0;      // талбай хадгалах жинхэнэ хийсвэр функц
+    virtual float perimeter() = 0; // периметр хадгалах жинхэнэ хийсвэр функц
     virtual void print()
     {
         shape::print();
         cout << a << " ";
-        cout << "talbai:" << this->area() << endl;
-        cout << "perimeter:" << this->perimeter() << endl;
+        cout << "talbai:" << area() << endl;
+        cout << "perimeter:" << perimeter() << endl;
     }
 };
 class circle : public twod
