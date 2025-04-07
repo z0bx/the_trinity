@@ -1,84 +1,109 @@
-#include <iostream> 
+#include <iostream>
 #include <cstring> //strcpy(), strlen()
-#include <cmath> // M_PI, sqrt()
+#include <cmath>   // M_PI, sqrt()
 using namespace std;
 
-
-//Shape class
-class shape {
+// Shape class
+class shape
+{
 protected:
-    char *name; //Дүрсийн нэр хадгалах
+    char *name; // Дүрсийн нэр хадгалах
 public:
-    shape() : name(nullptr) {} //Анхдагч байгуулагч
-    virtual ~shape() { delete[] name; } //name-г санах ойгоос чөлөөлөх
-    char *get_name() { return this->name; } 
-    void set_name(const char *n) { 
-        if (name != nullptr) 
+    shape() : name(nullptr) {}              // Анхдагч байгуулагч
+    virtual ~shape() { delete[] name; }     // name-г санах ойгоос чөлөөлөх
+    char *get_name() { return this->name; } // нэрийг авах функц
+    // нэр оноох функц
+    void set_name(const char *n)
+    {
+        if (name != nullptr)
             delete[] name;
         name = new char[strlen(n) + 1];
         strcpy(name, n);
     }
-    virtual void print() { cout << name << " "; }
+    virtual void print() { cout << name << " "; } // хэвлэх хийсвэр функц
 };
 
-
-class twod : public shape {
+class twod : public shape
+{
 protected:
     int a;
+
 public:
-    twod(int _a) : a(_a) {}
-    virtual float area() = 0; //хоосон функц
-    virtual void print() {
+     twod(int _a) : a(_a) {}            // анхдагч байгуулагч
+    virtual float area() = 0;           // талбай хадгалах жинхэнэ хийсвэр функц
+    virtual float perimeter() = 0;      // периметр хадгалах жинхэнэ хийсвэр функц
+    virtual void print()
+    {
         shape::print();
         cout << a << " ";
-        cout << this->area() << endl;
+        cout << "talbai:" << this->area() << endl;
+        cout << "perimeter:" << this->perimeter() << endl;
     }
 };
-class circle : public twod {
+class circle : public twod
+{
 public:
     circle(int _a) : twod(_a) { set_name("Circle"); }
-    float area() override {
+    float area() override
+    {
         return M_PI * a * a;
     }
+    float perimeter() override
+    {
+        return M_PI * 2 * a;
+    }
 };
-
-
-
 
 class square : public twod
 {
 public:
-    square(int _a) : twod(_a) 
+    square(int _a) : twod(_a)
     {
         set_name("Square");
     }
-    float area()
+    float area() override
     {
         return a * a;
     }
-};
-class triangle : public twod {
-public:
-    triangle(int _a) : twod(_a) { set_name("Triangle"); }
-    float area() override {
-        return (sqrt(3) / 4) * a * a;
+    float perimeter() override
+    {
+        return 4 * a;
     }
 };
-
+class triangle : public twod
+{
+public:
+    triangle(int _a) : twod(_a)
+    {
+        set_name("Triangle");
+    }
+    float area() override
+    {
+        return (sqrt(3) / 4) * a * a;
+    }
+    float perimeter() override
+    {
+        return 3 * a;
+    }
+};
 
 int main()
 {
     int size;
-    cout<<"heden durs oruulah ve?: "<<endl;
-    cin>>size;
-    twod **shapes = new twod*[size];  //twod* руу заасан динамик массив зарлаж байна.
-    for(int i=0; i<size; i++){
+    cout << "heden durs oruulah ve?: " << endl;
+    cin >> size;
+    twod **shapes = new twod *[size]; // twod* руу заасан динамик массив зарлаж байна.
+    for (int i = 0; i < size; i++)
+    {
         int k;
         int a;
-        cout<<"durs "<<i<<": "<<endl<<"1. Square"<<endl<<"2. Triangle"<<endl<<"3. Circle"<<endl;
-        cin>>k;
-        cout<<"a: ";
-        cin>>a;
+        cout << "durs " << i << ": " << endl
+             << "1. Square" << endl
+             << "2. Triangle" << endl
+             << "3. Circle" << endl;
+        cin >> k;
+        cout << "a: ";
+        cin >> a;
         switch (k)
         {
         case 1:
@@ -91,29 +116,54 @@ int main()
             shapes[i] = new circle(a);
             break;
         default:
-            cout<<"Buruu songolt hiilee, dahin hiine uu: "<<endl;
+            cout << "Buruu songolt hiilee, dahin hiine uu: " << endl;
             i--;
             break;
         }
     }
     // Bubble sort ашиглан талбайгаар эрэмбэлнэ.
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size - 1 - i; j++) {
-            if (shapes[j]->area() > shapes[j + 1]->area()) {
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size - 1 - i; j++)
+        {
+            if (shapes[j]->area() > shapes[j + 1]->area())
+            {
                 twod *temp = shapes[j];
-                shapes[j] = shapes[j+1];
-                shapes[j+1] = temp;
+                shapes[j] = shapes[j + 1];
+                shapes[j + 1] = temp;
             }
         }
     }
-    //Талбайгаар эрэмбэлсэн дүрсүүдээ хэвлэнэ.
+    // Талбайгаар эрэмбэлсэн дүрсүүдээ хэвлэнэ.
     cout << "Talbaigaar erembelegdsen ni:" << endl;
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++)
+    {
         shapes[i]->print();
-        cout<<endl;
+        cout << endl;
     }
-   //Санах ойгоос чөлөөлөх
-    for(int i=0; i<size; i++){
+    // Bubble sort ашиглан периметрээр эрэмбэлнэ.
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size - 1 - i; j++)
+        {
+            if (shapes[j]->perimeter() > shapes[j + 1]->perimeter())
+            {
+                twod *temp = shapes[j];
+                shapes[j] = shapes[j + 1];
+                shapes[j + 1] = temp;
+            }
+        }
+    }
+    // Периметрээр эрэмбэлсэн дүрсүүдээ хэвлэнэ.
+    cout << "Perimetereer erembelegdsen ni:" << endl;
+    for (int i = 0; i < size; i++)
+    {
+        shapes[i]->print();
+        cout << endl;
+    }
+    // Санах ойгоос чөлөөлөх
+    for (int i = 0; i < size; i++)
+    {
         delete shapes[i];
     }
     delete[] shapes;
