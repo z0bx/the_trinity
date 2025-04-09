@@ -3,10 +3,10 @@
 #include <cmath>   // M_PI, sqrt()
 using namespace std;
 
-// Shape classiig todorkhoilj baina
+// Shape class-г тодорхойлж байна
 class shape {
     protected:
-        //Bursiin neriigkhadgalakh zoriulalttai dinamic turliin massiv
+        // Дүрсийн нэрийг хадгалах динамик массив
         char *name;
     
         //Static khuvtsagch: bukh 'shape' bolon tuunii udam claasiin objectiin toog khadgalakh
@@ -20,7 +20,7 @@ class shape {
         // Ustagagch (destructor) funkts - objectiig sanakh oigoos ustgakh uyd duudagdana
         virtual ~shape() {
             //Khereb name ni nullptr bish bol sanakh oig chuluulnu
-            delete[] this name; // this ашиглаж name-г чөлөөлөх
+            delete[] name; // name-г чөлөөлөх
             this -> object_count--; // this ашиглаж object_count руу хандах
     
             //Object ustgakh burt object_count 1-eer bagsana
@@ -73,7 +73,7 @@ public:
     twod(int _a) : a(_a) {}        // анхдагч байгуулагч
     virtual float area() = 0;      // талбай хадгалах жинхэнэ хийсвэр функц
     virtual float perimeter() = 0; // периметр хадгалах жинхэнэ хийсвэр функц
-    virtual void print() // хэвлэх функц - нэр, хэмжээ, талбай, периметр
+    virtual void print()           // хэвлэх функц - нэр, хэмжээ, талбай, периметр
     {
         shape::print();
         cout << a << " ";
