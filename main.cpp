@@ -15,12 +15,13 @@ class shape {
         //Ankhdagch baiguulagch(constructor)
         shape() : name(nullptr) {
             //Object-uusgekh burt object_count 1-eer nemegdene
-            object_count++;
+            this -> object_count++; // this ашиглаж object_count руу хандаж байна
         }
         // Ustagagch (destructor) funkts - objectiig sanakh oigoos ustgakh uyd duudagdana
         virtual ~shape() {
             //Khereb name ni nullptr bish bol sanakh oig chuluulnu
-            delete[] name;
+            delete[] this name; // this ашиглаж name-г чөлөөлөх
+            this -> object_count--; // this ашиглаж object_count руу хандах
     
             //Object ustgakh burt object_count 1-eer bagsana
             object_count--;
@@ -43,17 +44,18 @@ class shape {
     
         //Objectiin neriig butsaakh funkts
         char *get_name() { 
-            return this->name; 
+            return this->name; //this нь тухайн объектын name гишүүнд хандаж байна.
         } 
         //Objectiin neriig tikhiruulakh funkts
         void set_name(const char *n) { 
             //Khereb umnun ner ugsun bol sabakh oig chuluulnu
-            if (name != nullptr) 
-                delete[] name;
+            if (this -> name != nullptr) //this-ээр тухайн объектоос name гишүүн рүү шууд хандаж байнан.
+                delete[] this -> name;
+
     
             //Shine nert zoriulj sanakh oi gargakh, khuulakh
-            name = new char[strlen(n) + 1]; // +1 ni tugsguliin '\0'-g zuriulagdsan
-            strcpy(name, n); //temdegt muriig khuulna
+            this -> name = new char[strlen(n) + 1]; // +1 ni tugsguliin '\0'-g zuriulagdsan
+            strcpy(this -> name, n); //temdegt muriig khuulna
         }
         virtual void print() { cout << name << " "; }
     };
@@ -71,20 +73,23 @@ public:
     twod(int _a) : a(_a) {}        // анхдагч байгуулагч
     virtual float area() = 0;      // талбай хадгалах жинхэнэ хийсвэр функц
     virtual float perimeter() = 0; // периметр хадгалах жинхэнэ хийсвэр функц
-    virtual void print()
+    virtual void print() // хэвлэх функц - нэр, хэмжээ, талбай, периметр
     {
         shape::print();
         cout << a << " ";
-        cout << "talbai:" << area() << endl;
-        cout << "perimeter:" << perimeter() << endl;
+        cout << "talbai:" << this -> area() << endl;
+        cout << "perimeter:" << this -> perimeter() << endl; // виртуал функцүүдийг тухайн объектын төрлөөс хамаарч дуудуулж байна
     }
 };
-class circle : public twod
-{
+
+// Square class
+class circle : public twod {
 public:
-    circle(int _a) : twod(_a) { set_name("Circle"); }
-    float area() override
-    {
+    circle(int _a) : twod(_a) { 
+        this -> set_name("Circle"); 
+    }
+
+    float area() override {
         return M_PI * a * a;
     }
     float perimeter() override
@@ -93,35 +98,34 @@ public:
     }
 };
 
-class square : public twod
-{
+// Square class 
+class square : public twod {
 public:
-    square(int _a) : twod(_a)
-    {
-        set_name("Square");
+    square(int _a) : twod(_a) {
+        this -> set_name("Square");
     }
-    float area() override
-    {
+    
+    float area() override {
         return a * a;
     }
-    float perimeter() override
-    {
+
+    float perimeter() override {
         return 4 * a;
     }
 };
-class triangle : public twod
-{
+
+// Traingle class
+class triangle : public twod {
 public:
-    triangle(int _a) : twod(_a)
-    {
-        set_name("Triangle");
+    triangle(int _a) : twod(_a) {
+        this -> set_name("Triangle");
     }
-    float area() override
-    {
+
+    float area() override {
         return (sqrt(3) / 4) * a * a;
     }
-    float perimeter() override
-    {
+
+    float perimeter() override {
         return 3 * a;
     }
 };
@@ -131,7 +135,10 @@ int main()
     int size;
     cout << "heden durs oruulah ve?: " << endl;
     cin >> size;
+    
     twod **shapes = new twod *[size]; // twod* руу заасан динамик массив зарлаж байна.
+    
+    // Дүрсүүдийг оруулж буй давталт
     for (int i = 0; i < size; i++)
     {
         int k;
@@ -143,6 +150,7 @@ int main()
         cin >> k;
         cout << "a: ";
         cin >> a;
+        // Сонголтоор обьект үүсгэх
         switch (k)
         {
         case 1:
@@ -160,6 +168,7 @@ int main()
             break;
         }
     }
+    
     // Bubble sort ашиглан талбайгаар эрэмбэлнэ.
     for (int i = 0; i < size; i++)
     {
@@ -195,16 +204,15 @@ int main()
     }
     // Периметрээр эрэмбэлсэн дүрсүүдээ хэвлэнэ.
     cout << "Perimetereer erembelegdsen ni:" << endl;
-    for (int i = 0; i < size; i++)
-    {
+    for (int i = 0; i < size; i++) {
         shapes[i]->print();
         cout << endl;
     }
     // Санах ойгоос чөлөөлөх
-    for (int i = 0; i < size; i++)
-    {
+    for (int i = 0; i < size; i++) {
         delete shapes[i];
     }
     delete[] shapes;
+    
     return 0;
 }
