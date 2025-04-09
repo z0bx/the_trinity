@@ -67,7 +67,7 @@ int shape::object_count = 0; //Ankhdagch utga 0 object baina
 class twod : public shape
 {
 protected:
-    int a;
+    int a; //a
 
 public:
     twod(int _a) : a(_a) {}        // анхдагч байгуулагч
