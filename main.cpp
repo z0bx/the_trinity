@@ -90,7 +90,7 @@ public:
     }
 
     float area() override {
-        return M_PI * a * a;
+        return M_PI * a * a; //duguin talbai
     }
     float perimeter() override
     {
