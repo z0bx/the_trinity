@@ -87,7 +87,7 @@ public:
         cout << a << " ";
         // виртуал функцүүдийг тухайн объектын төрлөөс хамаарч дуудуулж байна
         cout << "talbai:" << this->area() << endl;
-        cout << "perimeter:" << this->perimeter() << endl; 
+        cout << "perimeter:" << this->perimeter() << endl;
     }
 };
 
@@ -95,18 +95,18 @@ public:
 class circle : public twod
 {
 public:
-    circle(int _a) : twod(_a)       // анхдагч байгуулагч
+    circle(int _a) : twod(_a) // анхдагч байгуулагч
     {
-        set_name("Circle");         // нэрийг Circle болгон тохируулна
+        set_name("Circle"); // нэрийг Circle болгон тохируулна
     }
 
-    float area() override           // area-г дахин тодорхойлно
+    float area() override // area-г дахин тодорхойлно
     {
-        return M_PI * a * a;        // дугуйн талбайг буцаана
+        return M_PI * a * a; // дугуйн талбайг буцаана
     }
-    float perimeter() override      // perimeter-г дахин тодорхойлно
+    float perimeter() override // perimeter-г дахин тодорхойлно
     {
-        return M_PI * 2 * a;        // дугуйн периметрийг буцаана
+        return M_PI * 2 * a; // дугуйн периметрийг буцаана
     }
 };
 
@@ -114,74 +114,77 @@ public:
 class square : public twod
 {
 public:
-    square(int _a) : twod(_a)       // анхдагч байгуулагч
+    square(int _a) : twod(_a) // анхдагч байгуулагч
     {
-        set_name("Square");         // нэриийг Square болгон тохируулна
+        set_name("Square"); // нэриийг Square болгон тохируулна
     }
 
-    float area() override           // area-г дахин тодорхойлно
+    float area() override // area-г дахин тодорхойлно
     {
-        return a * a;               // квадратын талбайг буцаана
+        return a * a; // квадратын талбайг буцаана
     }
 
-    float perimeter() override      // perimeter-г дахин тодорхойлно
+    float perimeter() override // perimeter-г дахин тодорхойлно
     {
-        return 4 * a;               // квадратын периметрийг буцаана
+        return 4 * a; // квадратын периметрийг буцаана
     }
 };
 
 // twod-гээс удамшсан Traingle class
-class triangle : public twod        
+class triangle : public twod
 {
 public:
-    triangle(int _a) : twod(_a)     // анхдагч байгуулагч
+    triangle(int _a) : twod(_a) // анхдагч байгуулагч
     {
-        set_name("Triangle");       // нэриийг Triangle болгон тохируулна
+        set_name("Triangle"); // нэриийг Triangle болгон тохируулна
     }
 
-    float area() override           // area-г дахин тодорхойлно
+    float area() override // area-г дахин тодорхойлно
     {
         return (sqrt(3) / 4) * a * a; // зөв гурвалжингийн талбайг буцаана
     }
 
-    float perimeter() override      // perimeter-г дахин тодорхойлно
+    float perimeter() override // perimeter-г дахин тодорхойлно
     {
-        return 3 * a;               // зөв гурвалжингийн периметрийг буцаана
+        return 3 * a; // зөв гурвалжингийн периметрийг буцаана
     }
 };
-
-int main() 
+// main функц
+int main()
 {
-    int size; //
-    cout << "heden durs oruulah ve?: " << endl; 
-    cin >> size;//
+    int size; // дүрсүүдийн объектийн тоон хэмжээтэй массивийн хэмжээ
+    cout << "heden durs oruulah ve?: " << endl;
+    cin >> size; // хэмжээний утгыг гараас авна
 
     twod **shapes = new twod *[size]; // twod* руу заасан динамик массив зарлаж байна.
 
     // Дүрсүүдийг оруулж буй давталт
     for (int i = 0; i < size; i++)
     {
-        int k;
-        int a;
-        cout << "durs " << i+1 << ": " << endl
+        int k;                                      // Дүрсийн сонголтыг хадгалах хувсагч
+        int a;                                      // Тал эсвэл радиусын утгыг хадгалах хувьсагч
+        // Хэрэглэгчид зориулсан дүрсийг сонгох цэс
+        cout << "durs " << i + 1 << ": " << endl
              << "1. Square" << endl
              << "2. Triangle" << endl
              << "3. Circle" << endl;
-        cin >> k;
+        cin >> k;                       // Сонголтын утгыг гараас авна
+        // а-н утгыг гараас авна
         cout << "a: ";
         cin >> a;
-        // Сонголтоор обьект үүсгэх 
+        // Сонголтоор обьектон массив үүсгэх switch case
         switch (k)
         {
         case 1:
-            shapes[i] = new square(a);
+            shapes[i] = new square(a); // хэрэв k-н утга 1 бол square объект үүсгэнэ
             break;
         case 2:
-            shapes[i] = new triangle(a);
+            shapes[i] = new triangle(a); // хэрэв k-н утга 2 бол square объект үүсгэнэ
             break;
         case 3:
-            shapes[i] = new circle(a);
+            shapes[i] = new circle(a); // хэрэв k-н утга 3 бол square объект үүсгэнэ
             break;
+        // 1, 2, 3-с өөр утга оруулбал массивт өөр объект үүсгэх
         default:
             cout << "Buruu songolt hiilee, dahin hiine uu: " << endl;
             i--;
