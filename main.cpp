@@ -153,7 +153,7 @@ public:
 int main()
 {
     cout << "Objectiin too: ";
-    shape::print_count();
+    shape::print_count(); //Static хувьсагч дамжуулсан статик хэвлэх функцийг дуудаж байна
     int size; // дүрсүүдийн объектийн тоон хэмжээтэй массивийн хэмжээ
     cout << "heden durs oruulah ve?: " << endl;
     cin >> size; // хэмжээний утгыг гараас авна
@@ -193,7 +193,7 @@ int main()
             break;
         }
     }
-    cout << "Objectiin too: " << shape::get_count() << endl;
+    cout << "Objectiin too: " << shape::get_count() << endl; // Static нийлбэрийн утга буцаах функцыг дуудан хэвлэж байна
     // Bubble sort ашиглан талбайгаар эрэмбэлнэ.
     for (int i = 0; i < size; i++)
     {
