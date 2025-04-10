@@ -81,10 +81,10 @@ public:
     twod(int _a) : a(_a) {}        // анхдагч байгуулагч
     virtual float area() = 0;      // талбай хадгалах жинхэнэ хийсвэр функц
     virtual float perimeter() = 0; // периметр хадгалах жинхэнэ хийсвэр функц
-    virtual void print()           // хэвлэх функц - нэр, хэмжээ, талбай, периметр
+    virtual void print()  override         // хэвлэх функц - нэр, хэмжээ, талбай, периметр
     {
-        shape::print(); // Shape class-н print-г дуудаж байна
-        cout << a << " ";
+        this -> shape::print(); // Shape class-н print-г дуудаж байна
+        cout << this -> a << " ";
         // виртуал функцүүдийг тухайн объектын төрлөөс хамаарч дуудуулж байна
         cout << "talbai:" << this->area() << endl;
         cout << "perimeter:" << this->perimeter() << endl;
@@ -97,16 +97,16 @@ class circle : public twod
 public:
     circle(int _a) : twod(_a) // анхдагч байгуулагч
     {
-        set_name("Circle"); // нэрийг Circle болгон тохируулна
+        this -> set_name("Circle"); // нэрийг Circle болгон тохируулна
     }
 
     float area() override // area-г дахин тодорхойлно
     {
-        return M_PI * a * a; // дугуйн талбайг буцаана
+        return M_PI * this -> a * this -> a; // дугуйн талбайг буцаана
     }
     float perimeter() override // perimeter-г дахин тодорхойлно
     {
-        return M_PI * 2 * a; // дугуйн периметрийг буцаана
+        return M_PI * 2 * this -> a; // дугуйн периметрийг буцаана
     }
 };
 
@@ -116,17 +116,17 @@ class square : public twod
 public:
     square(int _a) : twod(_a) // анхдагч байгуулагч
     {
-        set_name("Square"); // нэриийг Square болгон тохируулна
+        this -> set_name("Square"); // нэриийг Square болгон тохируулна
     }
 
     float area() override // area-г дахин тодорхойлно
     {
-        return a * a; // квадратын талбайг буцаана
+        return this -> a * this -> a; // квадратын талбайг буцаана
     }
 
     float perimeter() override // perimeter-г дахин тодорхойлно
     {
-        return 4 * a; // квадратын периметрийг буцаана
+        return 4 * this -> a; // квадратын периметрийг буцаана
     }
 };
 
@@ -136,17 +136,17 @@ class triangle : public twod
 public:
     triangle(int _a) : twod(_a) // анхдагч байгуулагч
     {
-        set_name("Triangle"); // нэриийг Triangle болгон тохируулна
+        this -> set_name("Triangle"); // нэриийг Triangle болгон тохируулна
     }
 
     float area() override // area-г дахин тодорхойлно
     {
-        return (sqrt(3) / 4) * a * a; // зөв гурвалжингийн талбайг буцаана
+        return (sqrt(3) / 4) * this -> a * this -> a; // зөв гурвалжингийн талбайг буцаана
     }
 
     float perimeter() override // perimeter-г дахин тодорхойлно
     {
-        return 3 * a; // зөв гурвалжингийн периметрийг буцаана
+        return 3 * this -> a; // зөв гурвалжингийн периметрийг буцаана
     }
 };
 // main функц
