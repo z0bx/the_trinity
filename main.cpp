@@ -152,6 +152,8 @@ public:
 // main функц
 int main()
 {
+    cout << "Objectiin too: ";
+    shape::print_count();
     int size; // дүрсүүдийн объектийн тоон хэмжээтэй массивийн хэмжээ
     cout << "heden durs oruulah ve?: " << endl;
     cin >> size; // хэмжээний утгыг гараас авна
@@ -161,14 +163,14 @@ int main()
     // Дүрсүүдийг оруулж буй давталт
     for (int i = 0; i < size; i++)
     {
-        int k;                                      // Дүрсийн сонголтыг хадгалах хувсагч
-        int a;                                      // Тал эсвэл радиусын утгыг хадгалах хувьсагч
+        int k; // Дүрсийн сонголтыг хадгалах хувсагч
+        int a; // Тал эсвэл радиусын утгыг хадгалах хувьсагч
         // Хэрэглэгчид зориулсан дүрсийг сонгох цэс
         cout << "durs " << i + 1 << ": " << endl
              << "1. Square" << endl
              << "2. Triangle" << endl
              << "3. Circle" << endl;
-        cin >> k;                       // Сонголтын утгыг гараас авна
+        cin >> k; // Сонголтын утгыг гараас авна
         // а-н утгыг гараас авна
         cout << "a: ";
         cin >> a;
@@ -191,7 +193,7 @@ int main()
             break;
         }
     }
-
+    cout << "Objectiin too: " << shape::get_count() << endl;
     // Bubble sort ашиглан талбайгаар эрэмбэлнэ.
     for (int i = 0; i < size; i++)
     {
