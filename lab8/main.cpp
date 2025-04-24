@@ -65,7 +65,7 @@ public:
         this->name = new char[strlen(n) + 1]; // +1 нь төгсгөлийн '\0'- д зориулагдсан
         strcpy(this->name, n);                // тэмдэгт мөрийг хуулна
     }
-    virtual void print() { cout << name << " "; }
+    virtual void print() { cout << name << " "; } // хэвлэх хийсвэр функц
 };
 
 // Static хувьсагчийг классын гадна талд үүсгэж байна
