@@ -1,16 +1,48 @@
 #include <iostream>
-#include <cstring> //strcpy(), strlen()
-#include <cmath>   // M_PI, sqrt()
+#include <cstdlib>
+#include <ctime>
 #include "circle.hpp"
 #include "square.hpp"
 #include "triangle.hpp"
+#include "linkedlist.hpp"
+
 using namespace std;
 
-// Static хувьсагчийг классын гадна талд үүсгэж байна
-int shape::object_count = 0; // Анхдагч утга оноож байна
-// main функц
-int main()
-{
-    
+int main() {
+    srand(time(0));
+
+    // Shape-ийн обьектуудыг хадгалах LinkedList үүсгэх
+    LinkedList<shape*> shapes;
+
+    // Санамсаргүй хэмжээтэй гурвалжин, дөрвөлжин, тойрог объектуудыг үүсгэх
+    for (int i = 0; i < 20 + rand() % 10; i++) {
+        int shapeType = rand() % 3;
+        int size = 1 + rand() % 10; // 1-10 хэмжээтэй санамсаргүй хэмжээ
+
+        switch (shapeType) {
+        case 0:
+            shapes.add(new circle(size));
+            break;
+        case 1:
+            shapes.add(new square(size));
+            break;
+        case 2:
+            shapes.add(new triangle(size));
+            break;
+        }
+    }
+
+    // Жагсаалтыг талбайгаар нь эрэмбэлэх
+    shapes.sort();
+
+    // Эрдэмжсэн жагсаалтыг хэвлэх
+    cout << "Талбайгаар эрэмбэлэгдсэн хэлбэрүүд:" << endl;
+    shapes.print();
+
+    // Санах ойг цэвэрлэх
+    for (int i = 0; i < shapes.length(); ++i) {
+        delete shapes.get(i);
+    }
+
     return 0;
 }
