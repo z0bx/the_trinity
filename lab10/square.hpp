@@ -1,23 +1,25 @@
 #ifndef SQUARE_HPP
 #define SQUARE_HPP
+
 #include "twod.hpp"
-// twod-гээс удамшсан Square class
-class square : public twod
-{
+
+// Square класс нь twod классаас өвлөж авсан
+class square : public twod {
 public:
-    square(int _a) : twod(_a) // анхдагч байгуулагч
-    {
-        this -> set_name("Square"); // нэриийг Square болгон тохируулна
+    // Конструктор
+    square(int _a) : twod(_a) {
+        set_name("Square");
     }
 
-    float area() override // area-г дахин тодорхойлно
-    {
-        return this -> a * this -> a; // квадратын талбайг буцаана
+    // Талбайг тооцоолох функц
+    float area() override {
+        return a * a;
     }
 
-    float perimeter() override // perimeter-г дахин тодорхойлно
-    {
-        return 4 * this -> a; // квадратын периметрийг буцаана
+    // Тойргийн уртыг тооцоолох функц
+    float perimeter() override {
+        return 4 * a;
     }
 };
-#endif
+
+#endif // SQUARE_HPP

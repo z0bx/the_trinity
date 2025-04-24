@@ -1,23 +1,25 @@
 #ifndef TRIANGLE_HPP
 #define TRIANGLE_HPP
+
 #include "twod.hpp"
-// twod-гээс удамшсан Traingle class
-class triangle : public twod
-{
+
+// Triangle класс нь twod классаас өвлөж авсан
+class triangle : public twod {
 public:
-    triangle(int _a) : twod(_a) // анхдагч байгуулагч
-    {
-        this -> set_name("Triangle"); // нэриийг Triangle болгон тохируулна
+    // Конструктор
+    triangle(int _a) : twod(_a) {
+        set_name("Triangle");
     }
 
-    float area() override // area-г дахин тодорхойлно
-    {
-        return (sqrt(3) / 4) * this -> a * this -> a; // зөв гурвалжингийн талбайг буцаана
+    // Талбайг тооцоолох функц
+    float area() override {
+        return (sqrt(3) / 4) * a * a;
     }
 
-    float perimeter() override // perimeter-г дахин тодорхойлно
-    {
-        return 3 * this -> a; // зөв гурвалжингийн периметрийг буцаана
+    // Тойргийн уртыг тооцоолох функц
+    float perimeter() override {
+        return 3 * a;
     }
 };
-#endif
+
+#endif // TRIANGLE_HPP

@@ -1,24 +1,29 @@
 #ifndef TWOD_HPP
 #define TWOD_HPP
+
 #include "shape.hpp"
-#include <cmath>
-// Shape class-аас удамшсан twod class
-class twod : public shape
-{
+#include <cmath>   // M_PI, sqrt()
+
+// twod класс нь shape классаас өвлөж авсан
+class twod : public shape {
 protected:
-    int a; // Талын урт эсвэл радиусыг хадгалах гишүүн өгөгдөл
+    int a; // Хэмжээ буюу талбайг тооцоолох тал
 
 public:
-    twod(int _a) : a(_a) {}        // анхдагч байгуулагч
-    virtual float area() = 0;      // талбай хадгалах жинхэнэ хийсвэр функц
-    virtual float perimeter() = 0; // периметр хадгалах жинхэнэ хийсвэр функц
-    virtual void print()  override         // хэвлэх функц - нэр, хэмжээ, талбай, периметр
-    {
-        this -> shape::print(); // Shape class-н print-г дуудаж байна
-        cout << this -> a << " ";
-        // виртуал функцүүдийг тухайн объектын төрлөөс хамаарч дуудуулж байна
-        cout << "talbai:" << this->area() << endl;
-        cout << "perimeter:" << this->perimeter() << endl;
+    // Конструктор
+    twod(int _a) : a(_a) {}
+
+    // Талбай болон тойргийн уртыг тооцоолох виртуал функц
+    virtual float area() = 0;
+    virtual float perimeter() = 0;
+
+    // Хэлбэрийг хэвлэх функц
+    virtual void print() override {
+        cout << name << " ";
+        cout << "Хэмжээ: " << a << " ";
+        cout << "Талбай: " << area() << " ";
+        cout << "Тойргийн урт: " << perimeter() << endl;
     }
 };
-#endif
+
+#endif // TWOD_HPP
