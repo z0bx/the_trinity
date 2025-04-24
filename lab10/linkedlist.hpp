@@ -5,7 +5,7 @@
 using namespace std;
 
 // Node бүтэц нь LinkedList-ийн бүрэлдэхүүн хэсэг
-template <typename T>
+template <class T>
 struct Node {
     T data; // Элементүүдийн өгөгдөл
     Node* next; // Дараагийн элементийн холбоос
@@ -14,7 +14,7 @@ struct Node {
 };
 
 // LinkedList класс нь динамик өгөгдлийн бүтцийг ашиглах
-template <typename T>
+template <class T>
 class LinkedList {
 private:
     Node<T>* head; // Жагсаалтын эхлэл
