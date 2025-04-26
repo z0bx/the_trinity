@@ -36,7 +36,7 @@ int main() {
     shapes.sort();
 
     // Эрдэмжсэн жагсаалтыг хэвлэх
-    cout << "Талбайгаар эрэмбэлэгдсэн хэлбэрүүд:" << endl;
+    cout << "Sorted by area:" << endl;
     shapes.print();
 
     // Санах ойг цэвэрлэх

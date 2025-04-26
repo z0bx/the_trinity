@@ -20,9 +20,9 @@ public:
     // Хэлбэрийг хэвлэх функц
     virtual void print() override {
         cout << name << " ";
-        cout << "Хэмжээ: " << a << " ";
-        cout << "Талбай: " << area() << " ";
-        cout << "Тойргийн урт: " << perimeter() << endl;
+        cout << "Size: " << a << " ";
+        cout << "Area: " << area() << " ";
+        cout << "Perimeter: " << perimeter() << endl;
     }
 };
 
